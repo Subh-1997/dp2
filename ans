@@ -1,0 +1,82 @@
+1.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.House Robber
+
+class Solution {
+    public int memo(int[] nums, int i, int dp[]) {
+        if (i >= nums.length) {
+            return 0;
+        }
+        if (dp[i] != -1) {
+            return dp[i];
+        }
+        int pick = nums[i] + solve(nums, i + 2);
+        int notPick = solve(nums, i + 1);
+        dp[i] = Math.max(pick, notPick);
+        return dp[i];
+    }
+
+    public int solve(int[] nums, int i) {
+        if (i >= nums.length) {
+            return 0;
+        }
+        int pick = nums[i] + solve(nums, i + 2);
+        int notPick = solve(nums, i + 1);
+        int ans = Math.max(pick, notPick);
+        return ans;
+    }
+
+    public int rob(int[] nums) {
+        // return solve(nums,0);
+        int n = nums.length;
+        int dp[] = new int[n + 1];
+        // Arrays.fill(dp, -1);
+        // return memo(nums, 0, dp);
+        dp[n - 1] = nums[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            int pick = nums[i] + dp[i + 2];
+            int notPick = dp[i + 1];
+            dp[i] = Math.max(pick, notPick);
+        }
+        return dp[0];
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.Stickler Thief
+
+
+ class Solution
+{
+    public int solve(int i, int n , int arr[],int dp[]){
+        if(i>=n){
+            return 0;
+        }
+        if(dp[i]!=-1){
+            return dp[i];
+        }
+        int pick = arr[i]+solve(i+2,n,arr,dp);
+        int notPick = solve(i+1,n,arr,dp);
+        dp[i] = Math.max(pick, notPick);
+        return dp[i];
+    }
+    //Function to find the maximum money the thief can get.
+    public int FindMaxSum(int arr[], int n)
+    {
+        int dp[] = new int[n+1];
+        // Arrays.fill(dp,-1);
+        // Your code here
+        // return solve(0,n,arr,dp);
+        dp[n-1]=arr[n-1];
+        for(int i = n-2 ; i>=0 ;i--){
+             int pick = arr[i]+dp[i+2];
+             int notPick = dp[i+1];
+             dp[i]  = Math.max(pick , notPick);
+        }
+        return dp[0];
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.
